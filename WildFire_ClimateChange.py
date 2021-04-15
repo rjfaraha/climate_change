@@ -89,3 +89,21 @@ f, ax = plt.subplots()
 pd.plotting.lag_plot(df[col[3]])
 plt.title('LandOceanAvg')
 plt.savefig('lagplot_LandOceanAvgTemp.png')
+
+#Looking at city informations
+df_city = pd.read_csv('/Users/rfarahani/Documents/ML_general/climate_change_research/berkely_archive/GlobalLandTemperaturesByCity.csv', header=0, parse_dates=True, squeeze=True)
+df_city.dropna(inplace = True)
+df_city = df_city.reset_index(drop=True)
+df_city.columns
+
+
+df_city =df_city.loc[df_city['City'] == 'Berkeley']
+df_city['dt'] = pd.to_datetime(df_city['dt'])
+
+
+#lag profile for Berkely
+f, ax = plt.subplots()
+pd.plotting.lag_plot(df_city[df_city.columns[1]])
+plt.title('AverageTemperature_Berkeley')
+plt.savefig('lagplot_AvTemp_Berkeley.png')
+
